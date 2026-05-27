@@ -38,7 +38,7 @@ df = carregar_dados()
 st.title("🦟 Painel Público: Dengue e Saneamento em Bauru")
 st.markdown("""
 **Bem-vindo ao Explorador de Dados Públicos.**
-Esta ferramenta cruza informações do Ministério da Saúpython -m streamlit run "gerar dashboards.py"de e do Censo do IBGE para mostrar como a falta de infraestrutura urbana (como rede de esgoto adequada) impacta diretamente na proliferação do mosquito transmissor da Dengue na nossa cidade.
+Esta ferramenta cruza informações do Ministério da Saúde e do Censo do IBGE para mostrar como a falta de infraestrutura urbana (como rede de esgoto adequada) impacta diretamente na proliferação do mosquito transmissor da Dengue na nossa cidade.
 """)
 
 st.divider()
