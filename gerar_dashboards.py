@@ -1,16 +1,16 @@
 import pandas as pd
 import streamlit as st
 import plotly.express as px
+import os  # Adicione esta linha para o Python conseguir ler as variáveis do Render!
 
-st.set_page_config(page_title="Monitoramento: Dengue e Saneamento", layout="wide")
-
-# O Streamlit guarda o resultado da query em cache por 1 hora (ttl=3600) para não sobrecarregar o Supabase
 @st.cache_data(ttl=3600)
 def carregar_dados():
-    # Inicia a conexão com o banco
-    conn = st.connection("postgresql", type="sql")
+    # Puxa o link do banco de dados que você salvou no Render
+    url_banco = os.environ.get("DATABASE_URL")
     
-    # A query exata que você testou no banco
+    # Inicia a conexão passando a URL diretamente
+    conn = st.connection("postgresql", type="sql", url=url_banco)
+    
     query = """
     SELECT 
         t.data_inicio_semana AS "Data de Início",
@@ -28,7 +28,6 @@ def carregar_dados():
     ORDER BY t.data_inicio_semana;
     """
     
-    # Executa a query e já transforma em um DataFrame do Pandas
     df = conn.query(query)
     df['Data de Início'] = pd.to_datetime(df['Data de Início'])
     return df
